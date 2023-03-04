@@ -1,21 +1,23 @@
-import { injectCSS, removeInj } from "../util/inject.js";
+import { removeInj, updateCSS } from "../util/inject.js";
 
-const CSS = `
-* {
-  word-spacing: 1rem !important;
-}
-`;
+const SPACINGS = [0.75, 1.5];
 
 let cssInj;
 
-const wordSpacing = (enable) => {
-  if (enable) {
-    cssInj = injectCSS(CSS);
-  } else {
-    if (cssInj) {
-      removeInj(cssInj);
-    }
+const wordSpacing = (value) => {
+  if (!Number.isInteger(value) || value < 0 || value > SPACINGS.length - 1) {
+    removeInj(cssInj);
+    return;
   }
+
+  const CSS = `
+  * {
+    word-spacing: ${SPACINGS[value]}rem !important;
+  }
+  `;
+  console.log(CSS);
+
+  cssInj = updateCSS(cssInj, CSS);
 };
 
 export default wordSpacing;

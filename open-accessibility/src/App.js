@@ -21,14 +21,21 @@ function App() {
         </a>
         <button
           onClick={() => {
-            sendMsg({ action: "WORD_SPACING", value: true });
+            sendMsg({ action: "WORD_SPACING", value: 1 });
           }}
         >
-          ENABLE WORD SPACING
+          ENABLE WORD SPACING 2
         </button>
         <button
           onClick={() => {
-            sendMsg({ action: "WORD_SPACING", value: false });
+            sendMsg({ action: "WORD_SPACING", value: 0 });
+          }}
+        >
+          ENABLE WORD SPACING 1
+        </button>
+        <button
+          onClick={() => {
+            sendMsg({ action: "WORD_SPACING", value: -1 });
           }}
         >
           DISABLE WORD SPACING
