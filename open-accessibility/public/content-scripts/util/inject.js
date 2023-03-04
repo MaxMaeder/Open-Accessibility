@@ -1,13 +1,15 @@
-const injectCSS = (css) => {
-  let el = document.createElement("style");
+const updateCSS = (inj, css) => {
+  let el = inj ? inj : document.createElement("style");
   el.type = "text/css";
   el.innerText = css;
   document.head.appendChild(el);
   return el;
 };
 
-const removeInj = async (el) => {
-  el.parentElement.removeChild(el);
+const removeInj = async (inj) => {
+  if (!inj || !inj.parentElement) return;
+
+  inj.parentElement.removeChild(inj);
 };
 
-export { injectCSS, removeInj };
+export { updateCSS, removeInj };
