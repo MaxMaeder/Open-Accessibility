@@ -1,23 +1,45 @@
 import { removeInj, updateCSS } from "../util/inject.js";
 
-const SPACINGS = ["20px", "25px", "30px", "35px"];
+let enable = false;
 
+let htmlInj;
 let cssInj;
 
-const fontSize = (value) => {
-  if (!Number.isInteger(value) || value < 0 || value > SPACINGS.length - 1) {
+const CSS = `
+#ruler {
+  display: block;
+  position: fixed;
+  background-color: red;
+  height: 2px;
+  width: 100%;
+}
+`;
+
+window.addEventListener("mousemove", (e) => {
+  console.log("hi");
+  if (!enable) return;
+
+  const mouseY = e.offsetY;
+  console.log(mouseY);
+  document.getElementById("ruler").style.top = mouseY + "px";
+});
+
+const dyslexiaRuler = (value) => {
+  let enable = false;
+  if (value === 1) {
+    enable = true;
+  }
+
+  if (enable) {
+    htmlInj = document.createElement("div");
+    htmlInj.id = "ruler";
+    document.body.appendChild(htmlInj);
+
+    htmlInj.cssInj = updateCSS(cssInj, CSS);
+  } else {
+    removeInj(htmlInj);
     removeInj(cssInj);
-    return;
   }
-
-  const CSS = `
-  p {
-    font-size: ${SPACINGS[value]} !important;
-  }
-  `;
-  console.log(CSS);
-
-  cssInj = updateCSS(cssInj, CSS);
 };
 
-export default fontSize;
+export default dyslexiaRuler;

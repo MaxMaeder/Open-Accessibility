@@ -19,6 +19,8 @@ const messagesFromReactAppListener = (msg, sender, sendResponse) => {
   const feat = FEATURE_LIST[msg.action];
   if (!feat) {
     dErr("No feature found for specified action!");
+  } else {
+    console.log(feat);
   }
   feat.function(msg.value);
 
