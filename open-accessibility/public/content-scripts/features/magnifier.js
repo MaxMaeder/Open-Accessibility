@@ -9,9 +9,9 @@ const CSS = `
 #ruler {
   display: block;
   position: fixed;
-  background-color: red;
-  height: 2px;
+  height: 40px;
   width: 100%;
+  border: 1px black;
 }
 `;
 
@@ -22,8 +22,11 @@ window.addEventListener("mousemove", (e) => {
   document.getElementById("ruler").style.top = mouseY + "px";
 });
 
-const dyslexiaRuler = (value) => {
+const magnifier = (value) => {
   enable = value;
+  if (value === 1) {
+    enable = true;
+  }
 
   if (enable) {
     htmlInj = document.createElement("div");
@@ -37,4 +40,4 @@ const dyslexiaRuler = (value) => {
   }
 };
 
-export default dyslexiaRuler;
+export default magnifier;
