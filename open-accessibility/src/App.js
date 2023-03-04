@@ -1,5 +1,5 @@
-import "./App.css";
-
+import logo from './logo.svg';
+import './App.css';
 import SquareButton from "./components/square-button";
 import TestingForm from "./components/testing_form";
 import { sendMsg } from "./util/tabMessaging";
