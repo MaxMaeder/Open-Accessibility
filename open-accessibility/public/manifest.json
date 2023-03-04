@@ -7,9 +7,7 @@
     "default_popup": "index.html",
     "default_title": "Open the popup"
   },
-  "permissions": [
-    "activeTab"
-  ],
+  "permissions": ["activeTab"],
   "icons": {
     "16": "logo192.png",
     "48": "logo192.png",
@@ -17,9 +15,15 @@
   },
   "content_scripts": [
     {
-        "matches": ["http://*/*", "https://*/*"],
-        "css": ["./content-scripts/page-modifier.css"],
-        "js": ["./content-scripts/page-modifier.js"]
+      "matches": ["http://*/*", "https://*/*"],
+      "css": ["content-scripts/page-modifier.css"],
+      "js": ["content-scripts/content-script.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "resources": ["content-scripts/*.js"]
     }
   ]
 }

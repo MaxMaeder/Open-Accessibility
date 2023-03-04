@@ -21,10 +21,17 @@ function App() {
         </a>
         <button
           onClick={() => {
-            sendMsg({ title: "Hello World!" });
+            sendMsg({ action: "WORD_SPACING", value: true });
           }}
         >
-          Test Content Script
+          ENABLE WORD SPACING
+        </button>
+        <button
+          onClick={() => {
+            sendMsg({ action: "WORD_SPACING", value: false });
+          }}
+        >
+          DISABLE WORD SPACING
         </button>
       </header>
     </div>
