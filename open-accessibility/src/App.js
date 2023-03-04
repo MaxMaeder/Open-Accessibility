@@ -1,5 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import logo from "./logo.svg";
+import { sendMsg } from "./util/tabMessaging";
 
 function App() {
   return (
@@ -17,6 +19,13 @@ function App() {
         >
           Learn React
         </a>
+        <button
+          onClick={() => {
+            sendMsg({ title: "Hello World!" });
+          }}
+        >
+          Test Content Script
+        </button>
       </header>
     </div>
   );
