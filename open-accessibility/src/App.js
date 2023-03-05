@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 
 import { Formik } from "formik";
 import SquareButton from "./components/SquareButton";
+import logo from "./icon/logo-white.png";
 import { sendMsg } from "./util/tabMessaging";
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
   const initRef = useRef(initVals);
 
   useEffect(() => {
+    if (!chrome || !chrome.storage) return;
     chrome.storage.sync.get(null).then((result) => {
       initRef.current = Object.assign(initRef.current, result || {});
     });
@@ -47,7 +49,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header text-white font-medium">
-        <h1 className="text-sm p-2">Open Accessibility</h1>
+        {/*<h1 className="text-sm p-2">Open Accessibility</h1>*/}
+        <img className="h-24 pt-2 object-contain" src={logo} alt="Logo" />
 
         <Formik
           enableReinitialize
