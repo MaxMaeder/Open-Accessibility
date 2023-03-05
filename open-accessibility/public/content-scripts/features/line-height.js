@@ -1,12 +1,12 @@
 import { removeInj, updateCSS } from "../util/inject.js";
 
-const SPACINGS = ["normal", "1", "1.5", "2"];
+const SPACINGS = ["1", "1.5", "2"];
 
 let cssInj;
 
 const lineHeight = (value) => {
   if (!Number.isInteger(value) || value < 0 || value > SPACINGS.length - 1) {
-    removeInj(cssInj);
+    cssInj = removeInj(cssInj);
     return;
   }
 
