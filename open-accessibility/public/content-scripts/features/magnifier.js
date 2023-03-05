@@ -1,17 +1,29 @@
 import { removeInj, updateCSS } from "../util/inject.js";
 
+const MAG_HEIGHT = 80;
+
 let enable = false;
 
-let htmlInj;
+let htmlInj1;
+let htmlInj2;
 let cssInj;
 
 const CSS = `
-#ruler {
-  display: block;
+#top-mag, #bottom-mag {
   position: fixed;
-  height: 40px;
-  width: 100%;
-  border: 1px black;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+#top-mag {
+  top: 0;
+  border-bottom: 2px solid black;
+}
+#bottom-mag {
+  bottom: 0;
+  border-top: 2px solid black;
 }
 `;
 
@@ -19,7 +31,12 @@ window.addEventListener("mousemove", (e) => {
   if (!enable) return;
 
   const mouseY = e.clientY;
-  document.getElementById("ruler").style.top = mouseY + "px";
+
+  const topH = mouseY - MAG_HEIGHT / 2;
+  const bottomH = window.innerHeight - mouseY - MAG_HEIGHT / 2;
+
+  document.getElementById("top-mag").style.height = topH + "px";
+  document.getElementById("bottom-mag").style.height = bottomH + "px";
 });
 
 const magnifier = (value) => {
@@ -27,16 +44,22 @@ const magnifier = (value) => {
   if (value === 1) {
     enable = true;
   }
+  console.log(value);
+  console.log(enable);
 
   if (enable) {
-    htmlInj = document.createElement("div");
-    htmlInj.id = "ruler";
-    document.body.appendChild(htmlInj);
+    htmlInj1 = document.createElement("div");
+    htmlInj1.id = "top-mag";
+    document.body.appendChild(htmlInj1);
 
-    htmlInj.cssInj = updateCSS(cssInj, CSS);
+    htmlInj2 = document.createElement("div");
+    htmlInj2.id = "bottom-mag";
+    document.body.appendChild(htmlInj2);
+
+    cssInj = updateCSS(cssInj, CSS);
   } else {
-    removeInj(htmlInj);
-    removeInj(cssInj);
+    removeInj(htmlInj1);
+    removeInj(htmlInj2);
   }
 };
 

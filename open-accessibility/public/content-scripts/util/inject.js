@@ -6,10 +6,12 @@ const updateCSS = (inj, css) => {
   return el;
 };
 
-const removeInj = async (inj) => {
+const removeInj = (inj) => {
   if (!inj || !inj.parentElement) return;
 
   inj.parentElement.removeChild(inj);
+
+  return null;
 };
 
 export { updateCSS, removeInj };
