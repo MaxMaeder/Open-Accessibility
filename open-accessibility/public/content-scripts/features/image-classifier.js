@@ -5,7 +5,7 @@
 
 import { removeInj, updateCSS } from "../util/inject.js";
 
-import { apiKey, apiSecret } from './image-classifier.js';
+import { apiKey, apiSecret } from './image-classifier-keys.js';
 
 let cssInj;
 
@@ -26,7 +26,7 @@ async function getAltText(imageUrl) {
   async function getImageDescription(endpoint, options) {
     const response = await fetch(endpoint, options);
     const data = await response.json();
-    const tag = data.result.tags[0].tag.en;
+    const tag = await data.result.tags[0].tag.en;
     return "Image of a " + tag;
   }
 
@@ -38,36 +38,68 @@ async function getAltText(imageUrl) {
  * @param {Integer} showToolTip 1: adds popper alt texts, 0: doesnt
  */
 const addAltText = (showToolTip) => {
-  const imagesWithoutAltText = document.querySelectorAll("img:not([alt])");
+  let displayingToolTips = false;
 
-  imagesWithoutAltText.forEach((img) => {
-    if (img.width < 200 && img.height < 200) {
-      console.log("Image too small, skipping.");
-      return;
-    }
+  if (showToolTip === 1 || showToolTip === true) {
+    displayingToolTips = true;
+  }
 
-    let timeoutId;
+  console.log("displaying tool tips: " + displayingToolTips);
 
-    const callGetAltText = async () => {
-      clearTimeout(timeoutId);
-      const altText = await getAltText(img.src);
-      img.alt = altText;
-      console.log(altText);
+  const imagesWithoutAltText = document.querySelectorAll("img[alt=''], img:not([alt])");
+  const imagesWithAltText = document.querySelectorAll("img[alt]:not([alt=''])");
 
-      if (showToolTip === 1) {
+  const hasRunBefore = document.querySelectorAll("p.IMAGE_CLASSIFIER_tooltip").length !== 0;
+
+  if (!hasRunBefore) {
+    imagesWithoutAltText.forEach((img) => {
+      if (img.width < 200 && img.height < 200) {
+        console.log("Image too small, skipping.");
+        return;
+      }
+
+      let timeoutId;
+
+      const callGetAltText = async () => {
+        const altText = await getAltText(img.src);
+        img.alt = altText;
+        console.log(altText);
+
         const tooltip = document.createElement("p");
-        tooltip.classList.add("tooltip");
+        tooltip.classList.add("IMAGE_CLASSIFIER_tooltip");
         tooltip.innerText = altText;
-        tooltip.style.backgroundColor = "#FFFFFF";
+        tooltip.style.backgroundColor = "#FFFF00";
+        tooltip.style.fontWeight = "bold";
+        tooltip.style.padding = "0.5em";
+        if (displayingToolTips === 0) {
+          tooltip.style.visibility = "hidden";
+        } else if (displayingToolTips === 1) {
+          tooltip.style.visibility = "visible";
+        }
         document.body.appendChild(tooltip);
+
         Popper.createPopper(img, tooltip, {
           placement: "top",
         });
-      }
-    };
+      };
 
-    timeoutId = setTimeout(callGetAltText, 500);
-  });
+      timeoutId = setTimeout(callGetAltText, 500);
+    });
+  }
+
+  if (hasRunBefore) {
+    const imagesWithToolTips = document.querySelectorAll("p.IMAGE_CLASSIFIER_tooltip");
+
+    console.log("Changing visibility to " + displayingToolTips);
+
+    imagesWithToolTips.forEach(element => {
+      if (displayingToolTips === 0) {
+        element.style.visibility = "hidden";
+      } else if (displayingToolTips === 1) {
+        element.style.visibility = "visible";
+      }
+    })
+  }
 }
 
 export default addAltText;
