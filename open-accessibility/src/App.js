@@ -45,7 +45,7 @@ function App() {
             }
             onClick={() => {
               setDyslexiaFonts(!dyslexiaFonts);
-              sendMsg({ action: "DYSLEXIA_FONTS", value: dyslexiaFonts });
+              sendMsg({ action: "DYSLEXIA_FONTS", value: !dyslexiaFonts });
             }}
             enabledState={dyslexiaFonts}
           />
@@ -177,7 +177,7 @@ function App() {
               }
 
               setLineHeight({ current: newCurrent, options: lineHeight.options });
-              sendMsg({ action: "LINE_HEIGHT", value: lineHeight.current });
+              sendMsg({ action: "LINE_HEIGHT", value: newCurrent });
             }}
             enabledState={lineHeight.current}
           />
@@ -187,7 +187,7 @@ function App() {
           </svg>}
             onClick={() => {
               setLargeCursor(!largeCursor);
-              sendMsg({ action: "LARGE_CURSOR", value: largeCursor });
+              sendMsg({ action: "LARGE_CURSOR", value: !largeCursor });
             }}
             enabledState={largeCursor}
           />
@@ -251,7 +251,7 @@ function App() {
             }
             onClick={() => {
               setImageCaptioning(!imageCaptioning);
-              sendMsg({ action: "IMAGE_CAPTIONING", value: imageCaptioning });
+              sendMsg({ action: "ADD_ALT_TEXT", value: imageCaptioning });
             }}
             enabledState={imageCaptioning}
           />

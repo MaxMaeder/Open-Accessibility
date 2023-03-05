@@ -1,13 +1,4 @@
-//import { createPopper } from "../lib/popper.min.js";
-
-// const apiKey = process.env.REACT_APP_IMAGGA_KEY;
-// const apiSecret = process.env.REACT_APP_IMAGGA_SECRET;
-
-import { removeInj, updateCSS } from "../util/inject.js";
-
 import { apiKey, apiSecret } from './image-classifier-keys.js';
-
-let cssInj;
 
 /**
  * Sends the image to an image classifier and returns expected alt text.
@@ -47,7 +38,6 @@ const addAltText = (showToolTip) => {
   console.log("displaying tool tips: " + displayingToolTips);
 
   const imagesWithoutAltText = document.querySelectorAll("img[alt=''], img:not([alt])");
-  const imagesWithAltText = document.querySelectorAll("img[alt]:not([alt=''])");
 
   const hasRunBefore = document.querySelectorAll("p.IMAGE_CLASSIFIER_tooltip").length !== 0;
 
