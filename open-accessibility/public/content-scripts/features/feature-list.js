@@ -20,7 +20,7 @@ const FEATURE_LIST = {
   DYSLEXIA_RULER: {
     function: dyslexiaRuler,
   },
-  MAGNIFIER: {
+  READING_GUIDE: {
     function: magnifier,
   },
   EMPHASIZE_LINKS: {
