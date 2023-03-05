@@ -8,6 +8,9 @@ let htmlInj;
 let cssInj;
 
 const CSS = `
+body {
+  cursor: none !important;
+}
 #cursor {
   position: fixed;
   z-index: 100000;
@@ -43,14 +46,9 @@ const largeCursor = async (value) => {
     document.body.appendChild(htmlInj);
 
     cssInj = updateCSS(cssInj, CSS);
-
-    document.body.style.cursor = "none !important";
   } else {
     htmlInj = removeInj(htmlInj);
     cssInj = removeInj(cssInj);
-
-    document.body.style.cursor = "none !important";
-    //document.body.style.cursor = "unset";
   }
 };
 
