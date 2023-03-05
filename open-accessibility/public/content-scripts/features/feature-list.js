@@ -1,3 +1,4 @@
+import addAltText from "./image-classifier.js";
 import dyslexiaRuler from "./dyslexia-ruler.js";
 import emphasizeLinks from "./emphasize-links.js";
 import fontSize from "./font-size.js";
@@ -30,6 +31,9 @@ const FEATURE_LIST = {
   },
   LARGE_CURSOR: {
     function: largeCursor,
+  },
+  ADD_ALT_TEXT: {
+    function: addAltText,
   },
 };
 

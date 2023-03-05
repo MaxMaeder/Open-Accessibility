@@ -2,6 +2,7 @@
 
 # env variables
 *.env
+image-classifier-keys.js
 
 # dependencies
 /node_modules
