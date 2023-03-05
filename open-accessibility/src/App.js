@@ -209,7 +209,6 @@ function App() {
             onClick={() => {
               setReadingGuide(!readingGuide);
               sendMsg({ action: "READING_GUIDE", value: readingGuide });
-              sendMsg({ action: "READING_GUIDE", value: readingGuide });
             }}
             enabledState={readingGuide}
           />
