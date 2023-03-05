@@ -251,7 +251,7 @@ function App() {
             }
             onClick={() => {
               setImageCaptioning(!imageCaptioning);
-              sendMsg({ action: "ADD_ALT_TEXT", value: imageCaptioning });
+              sendMsg({ action: "ADD_ALT_TEXT", value: !imageCaptioning });
             }}
             enabledState={imageCaptioning}
           />
