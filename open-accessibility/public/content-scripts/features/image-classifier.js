@@ -1,16 +1,18 @@
-import { apiKey, apiSecret } from './image-classifier-keys.js';
+/*global Popper*/
+
+import { apiKey, apiSecret } from "./image-classifier-keys.js";
 
 /**
  * Sends the image to an image classifier and returns expected alt text.
  * @param {String} imageUrl The url of the image to be classified
  */
 async function getAltText(imageUrl) {
-  const endpoint = 'https://api.imagga.com/v2/tags?image_url=' + imageUrl;
+  const endpoint = "https://api.imagga.com/v2/tags?image_url=" + imageUrl;
 
   const options = {
     method: "GET",
     headers: {
-      "Authorization": "Basic " + btoa(apiKey + ":" + apiSecret)
+      Authorization: "Basic " + btoa(apiKey + ":" + apiSecret),
     },
   };
 
@@ -37,9 +39,12 @@ const addAltText = (showToolTip) => {
 
   console.log("displaying tool tips: " + displayingToolTips);
 
-  const imagesWithoutAltText = document.querySelectorAll("img[alt=''], img:not([alt])");
+  const imagesWithoutAltText = document.querySelectorAll(
+    "img[alt=''], img:not([alt])"
+  );
 
-  const hasRunBefore = document.querySelectorAll("p.IMAGE_CLASSIFIER_tooltip").length !== 0;
+  const hasRunBefore =
+    document.querySelectorAll("p.IMAGE_CLASSIFIER_tooltip").length !== 0;
 
   if (!hasRunBefore) {
     imagesWithoutAltText.forEach((img) => {
@@ -78,18 +83,20 @@ const addAltText = (showToolTip) => {
   }
 
   if (hasRunBefore) {
-    const imagesWithToolTips = document.querySelectorAll("p.IMAGE_CLASSIFIER_tooltip");
+    const imagesWithToolTips = document.querySelectorAll(
+      "p.IMAGE_CLASSIFIER_tooltip"
+    );
 
     console.log("Changing visibility to " + displayingToolTips);
 
-    imagesWithToolTips.forEach(element => {
+    imagesWithToolTips.forEach((element) => {
       if (displayingToolTips === 0) {
         element.style.visibility = "hidden";
       } else if (displayingToolTips === 1) {
         element.style.visibility = "visible";
       }
-    })
+    });
   }
-}
+};
 
 export default addAltText;
