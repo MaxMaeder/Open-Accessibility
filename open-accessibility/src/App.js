@@ -145,7 +145,7 @@ function App() {
                   }}
                   enabledState={values.desaturate}
                 />
-
+                {/*
                 <SquareButton
                   text="Screen Reader"
                   icon={
@@ -169,7 +169,7 @@ function App() {
                   }}
                   enabledState={values.screenReader}
                 />
-
+                */}
                 <SquareButton
                   text="Word Spacing"
                   icon={
