@@ -26,16 +26,3 @@ const sendMsg = async (msg) => {
 };
 
 export { sendMsg };
-/*
-// Get urls for content scripts
-function on_message(message, sender, sendResponse) {
-  console.log("got message");
-  console.log(message);
-
-  chrome.runtime.getURL(message).then((url) => sendResponse(url));
-
-  return true;
-}
-
-chrome.runtime.onMessage.addListener(on_message);
-*/
