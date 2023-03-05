@@ -40,7 +40,7 @@ function App() {
   const initRef = useRef(initVals);
 
   useEffect(() => {
-    if (!chrome || !chrome.storage) return;
+    //if (!chrome || !chrome.storage) return;
     chrome.storage.sync.get(null).then((result) => {
       initRef.current = Object.assign(initRef.current, result || {});
     });
