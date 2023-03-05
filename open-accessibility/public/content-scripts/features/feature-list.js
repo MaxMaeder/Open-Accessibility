@@ -1,6 +1,8 @@
 import addAltText from "./image-classifier.js";
+import desaturateColors from "./desaturate-colors.js";
 import disableAnimations from "./disable-animations.js";
 import dyslexiaRuler from "./dyslexia-ruler.js";
+import dyslexicFont from "./dyslexic-font.js";
 import emphasizeLinks from "./emphasize-links.js";
 import fontSize from "./font-size.js";
 import largeCursor from "./large-cursor.js";
@@ -38,6 +40,12 @@ const FEATURE_LIST = {
   },
   DISABLE_ANIMATIONS: {
     function: disableAnimations,
+  },
+  DESATURATE: {
+    function: desaturateColors,
+  },
+  DYSLEXIA_FONTS: {
+    function: dyslexicFont,
   },
 };
 
