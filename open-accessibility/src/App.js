@@ -8,11 +8,11 @@ import { useState } from "react";
 function App() {
   const [dyslexiaFonts, setDyslexiaFonts] = useState(false);
   const [fontSize, setFontSize] = useState({ current: -1, options: [-1, 0, 1, 2] });
-  const [colorBlindness, setColorBlindness] = useState(false);
+  const [desaturate, setDesaturate] = useState({ current: -1, options: [-1, 0] });
   const [screenReader, setScreenReader] = useState(false);
   const [wordSpacing, setWordSpacing] = useState({ current: -1, options: [-1, 0, 1] });
   const [lineHeight, setLineHeight] = useState({ current: -1, options: [-1, 0, 1, 2] });
-  const [magnifier, setMagnifier] = useState(false);
+  const [largeCursor, setLargeCursor] = useState(false);
   const [readingGuide, setReadingGuide] = useState(false);
   const [dyslexiaRuler, setDyslexiaRuler] = useState(false);
   const [imageCaptioning, setImageCaptioning] = useState(false);
@@ -34,22 +34,32 @@ function App() {
             }
             onClick={() => {
               setDyslexiaFonts(!dyslexiaFonts);
-              sendMsg({ active: "DYSLEXIA_FONTS", value: dyslexiaFonts });
+              sendMsg({ action: "DYSLEXIA_FONTS", value: dyslexiaFonts });
             }}
+            enabledState={dyslexiaFonts}
           />
 
-          <SquareButton text="Font Size" icon={<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-type mx-auto mt-4" viewBox="0 0 16 16"
+          <SquareButton text="Font Size" icon={<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-type mx-auto mt-4" viewBox="0 0 16 16">
+            <path d="m2.244 13.081.943-2.803H6.66l.944 2.803H8.86L5.54 3.75H4.322L1 13.081h1.244zm2.7-7.923L6.34 9.314H3.51l1.4-4.156h.034zm9.146 7.027h.035v.896h1.128V8.125c0-1.51-1.114-2.345-2.646-2.345-1.736 0-2.59.916-2.666 2.174h1.108c.068-.718.595-1.19 1.517-1.19.971 0 1.518.52 1.518 1.464v.731H12.19c-1.647.007-2.522.8-2.522 2.058 0 1.319.957 2.18 2.345 2.18 1.06 0 1.716-.43 2.078-1.011zm-1.763.035c-.752 0-1.456-.397-1.456-1.244 0-.65.424-1.115 1.408-1.115h1.805v.834c0 .896-.752 1.525-1.757 1.525z" />
+          </svg>}
             onClick={() => {
-              // Set the current font size to the next option in the array
-              setFontSize({ current: (fontSize.current + 1) % fontSize.options.length, options: fontSize.options });
+              // Set the current word spacing to the next one in the array
+              let newCurrent = fontSize.current;
+
+              if (newCurrent >= fontSize.options[fontSize.options.length - 1]) {
+                newCurrent = -1;
+              } else {
+                newCurrent++;
+              }
+
+              setFontSize({ current: newCurrent, options: fontSize.options });
               sendMsg({ action: "FONT_SIZE", value: fontSize.current });
             }}
-          >
-            <path d="m2.244 13.081.943-2.803H6.66l.944 2.803H8.86L5.54 3.75H4.322L1 13.081h1.244zm2.7-7.923L6.34 9.314H3.51l1.4-4.156h.034zm9.146 7.027h.035v.896h1.128V8.125c0-1.51-1.114-2.345-2.646-2.345-1.736 0-2.59.916-2.666 2.174h1.108c.068-.718.595-1.19 1.517-1.19.971 0 1.518.52 1.518 1.464v.731H12.19c-1.647.007-2.522.8-2.522 2.058 0 1.319.957 2.18 2.345 2.18 1.06 0 1.716-.43 2.078-1.011zm-1.763.035c-.752 0-1.456-.397-1.456-1.244 0-.65.424-1.115 1.408-1.115h1.805v.834c0 .896-.752 1.525-1.757 1.525z" />
-          </svg>} />
+            enabledState={fontSize.current}
+          />
 
           <SquareButton
-            text="Color Blindness"
+            text="Desaturate"
             icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -63,9 +73,10 @@ function App() {
               </svg>
             }
             onClick={() => {
-              setColorBlindness(!colorBlindness);
-              sendMsg({ active: "COLOR_BLINDNESS", value: colorBlindness });
+              setDesaturate(!desaturate);
+              sendMsg({ action: "DESATURATE", value: desaturate });
             }}
+            enabledState={desaturate}
           />
 
           <SquareButton
@@ -87,8 +98,9 @@ function App() {
             }
             onClick={() => {
               setScreenReader(!screenReader);
-              sendMsg({ active: "SCREEN_READER", value: screenReader });
+              sendMsg({ action: "SCREEN_READER", value: screenReader });
             }}
+            enabledState={screenReader}
           />
 
           <SquareButton
@@ -111,9 +123,18 @@ function App() {
             }
             onClick={() => {
               // Set the current word spacing to the next one in the array
-              setWordSpacing({ current: (wordSpacing.current + 1) % wordSpacing.options.length, options: wordSpacing.options });
+              let newCurrent = wordSpacing.current;
+
+              if (newCurrent >= wordSpacing.options[wordSpacing.options.length - 1]) {
+                newCurrent = -1;
+              } else {
+                newCurrent++;
+              }
+
+              setWordSpacing({ current: newCurrent, options: wordSpacing.options });
               sendMsg({ action: "WORD_SPACING", value: wordSpacing.current });
             }}
+            enabledState={wordSpacing.current}
           />
 
           <SquareButton
@@ -135,19 +156,29 @@ function App() {
               </svg>
             }
             onClick={() => {
-              // Set the current line height to the next one in the array
-              setLineHeight({ current: (lineHeight.current + 1) % lineHeight.options.length, options: lineHeight.options });
+              // Set the current word spacing to the next one in the array
+              let newCurrent = lineHeight.current;
+
+              if (newCurrent >= lineHeight.options[lineHeight.options.length - 1]) {
+                newCurrent = -1;
+              } else {
+                newCurrent++;
+              }
+
+              setLineHeight({ current: newCurrent, options: lineHeight.options });
               sendMsg({ action: "LINE_HEIGHT", value: lineHeight.current });
             }}
+            enabledState={lineHeight.current}
           />
 
-          < SquareButton text="Magnifier" icon={< svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-search mx-auto mt-4" viewBox="0 0 16 16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+          <SquareButton text="Large Cursor" icon={<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-hand-index mx-auto mt-4" viewBox="0 0 16 16">
+            <path d="M6.75 1a.75.75 0 0 1 .75.75V8a.5.5 0 0 0 1 0V5.467l.086-.004c.317-.012.637-.008.816.027.134.027.294.096.448.182.077.042.15.147.15.314V8a.5.5 0 1 0 1 0V6.435a4.9 4.9 0 0 1 .106-.01c.316-.024.584-.01.708.04.118.046.3.207.486.43.081.096.15.19.2.259V8.5a.5.5 0 0 0 1 0v-1h.342a1 1 0 0 1 .995 1.1l-.271 2.715a2.5 2.5 0 0 1-.317.991l-1.395 2.442a.5.5 0 0 1-.434.252H6.035a.5.5 0 0 1-.416-.223l-1.433-2.15a1.5 1.5 0 0 1-.243-.666l-.345-3.105a.5.5 0 0 1 .399-.546L5 8.11V9a.5.5 0 0 0 1 0V1.75A.75.75 0 0 1 6.75 1zM8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v5.34l-1.2.24a1.5 1.5 0 0 0-1.196 1.636l.345 3.106a2.5 2.5 0 0 0 .405 1.11l1.433 2.15A1.5 1.5 0 0 0 6.035 16h6.385a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5.114 5.114 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.632 2.632 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046l-.048.002zm2.094 2.025z" />
           </svg>}
             onClick={() => {
-              setMagnifier(!magnifier);
-              sendMsg({ active: "MAGNIFIER", value: magnifier });
+              setLargeCursor(!largeCursor);
+              sendMsg({ action: "LARGE_CURSOR", value: largeCursor });
             }}
+            enabledState={largeCursor}
           />
 
           <SquareButton text="Reading Guide" icon={<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-book-half mx-auto mt-4" viewBox="0 0 16 16">
@@ -155,8 +186,9 @@ function App() {
           </svg>}
             onClick={() => {
               setReadingGuide(!readingGuide);
-              sendMsg({ active: "READING_GUIDE", value: readingGuide });
+              sendMsg({ action: "READING_GUIDE", value: readingGuide });
             }}
+            enabledState={readingGuide}
           />
 
           <SquareButton text="Dyslexia Ruler" icon={<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-rulers mx-auto mt-4" viewBox="0 0 16 16">
@@ -164,8 +196,9 @@ function App() {
           </svg>}
             onClick={() => {
               setDyslexiaRuler(!dyslexiaRuler);
-              sendMsg({ active: "DYSLEXIA_RULER", value: dyslexiaRuler });
+              sendMsg({ action: "DYSLEXIA_RULER", value: dyslexiaRuler });
             }}
+            enabledState={dyslexiaRuler}
           />
 
           <SquareButton text="Image Captioning" icon={<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-image mx-auto mt-4" viewBox="0 0 16 16">
@@ -174,8 +207,9 @@ function App() {
           </svg>}
             onClick={() => {
               setImageCaptioning(!imageCaptioning);
-              sendMsg({ active: "IMAGE_CAPTIONING", value: imageCaptioning });
+              sendMsg({ action: "IMAGE_CAPTIONING", value: imageCaptioning });
             }}
+            enabledState={imageCaptioning}
           />
 
           <SquareButton text="Emphasize Links" icon={<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-link-45deg mx-auto mt-4" viewBox="0 0 16 16">
@@ -184,8 +218,9 @@ function App() {
           </svg>}
             onClick={() => {
               setEmphasizeLinks(!emphasizeLinks);
-              sendMsg({ active: "EMPHASIZE_LINKS", value: emphasizeLinks });
+              sendMsg({ action: "EMPHASIZE_LINKS", value: emphasizeLinks });
             }}
+            enabledState={emphasizeLinks}
           />
 
           <TestingForm></TestingForm>
