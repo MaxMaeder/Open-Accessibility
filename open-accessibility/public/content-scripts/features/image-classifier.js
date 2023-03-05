@@ -87,22 +87,24 @@ const addAltText = (showToolTip) => {
           img.alt = altText;
           console.log(altText);
 
-          const tooltip = document.createElement("p");
-          tooltip.classList.add("IMAGE_CLASSIFIER_tooltip");
-          tooltip.innerText = img.alt;
-          tooltip.style.backgroundColor = "#FFFF00";
-          tooltip.style.fontWeight = "bold";
-          tooltip.style.padding = "0.5em";
-          if (displayingToolTips === false) {
-            tooltip.style.visibility = "hidden";
-          } else if (displayingToolTips === true) {
-            tooltip.style.visibility = "visible";
-          }
-          document.body.appendChild(tooltip);
+          if (img.alt !== "") {
+            const tooltip = document.createElement("p");
+            tooltip.classList.add("IMAGE_CLASSIFIER_tooltip");
+            tooltip.innerText = img.alt;
+            tooltip.style.backgroundColor = "#FFFF00";
+            tooltip.style.fontWeight = "bold";
+            tooltip.style.padding = "0.5em";
+            if (displayingToolTips === false) {
+              tooltip.style.visibility = "hidden";
+            } else if (displayingToolTips === true) {
+              tooltip.style.visibility = "visible";
+            }
+            document.body.appendChild(tooltip);
 
-          Popper.createPopper(img, tooltip, {
-            placement: "top",
-          });
+            Popper.createPopper(img, tooltip, {
+              placement: "top",
+            });
+          }
         };
 
         callGetAltText();
