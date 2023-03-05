@@ -1,5 +1,7 @@
 import { removeInj, updateCSS } from "../util/inject.js";
 
+import pointer from "../assets/pointer.js";
+
 let enable = false;
 
 let htmlInj;
@@ -8,7 +10,7 @@ let cssInj;
 const CSS = `
 #cursor {
   position: fixed;
-  z-index: 100;
+  z-index: 100000;
   height: 50px;
   aspect-ratio: 1;
   pointer-events: none;
@@ -26,7 +28,7 @@ window.addEventListener("mousemove", (e) => {
   document.getElementById("cursor").style.left = mouseX - 12 + "px";
 });
 
-const largeCursor = (value) => {
+const largeCursor = async (value) => {
   enable = value;
   if (value === 1) {
     enable = true;
@@ -36,8 +38,7 @@ const largeCursor = (value) => {
 
   if (enable) {
     htmlInj = document.createElement("img");
-    htmlInj.src =
-      "chrome-extension://hgmhnhnhfhimfepckbhbkkpbfdgkdoff/images/pointer.svg";
+    htmlInj.src = pointer;
     htmlInj.id = "cursor";
     document.body.appendChild(htmlInj);
 
@@ -48,7 +49,8 @@ const largeCursor = (value) => {
     htmlInj = removeInj(htmlInj);
     cssInj = removeInj(cssInj);
 
-    document.body.style.cursor = "unset";
+    document.body.style.cursor = "none !important";
+    //document.body.style.cursor = "unset";
   }
 };
 

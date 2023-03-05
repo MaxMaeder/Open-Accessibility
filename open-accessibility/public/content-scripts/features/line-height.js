@@ -15,7 +15,6 @@ const lineHeight = (value) => {
     line-height: ${SPACINGS[value]} !important;
   }
   `;
-  console.log(CSS);
 
   cssInj = updateCSS(cssInj, CSS);
 };

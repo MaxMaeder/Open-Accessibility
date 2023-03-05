@@ -15,7 +15,6 @@ const wordSpacing = (value) => {
     word-spacing: ${SPACINGS[value]}rem !important;
   }
   `;
-  console.log(CSS);
 
   cssInj = updateCSS(cssInj, CSS);
 };

@@ -44,8 +44,6 @@ const magnifier = (value) => {
   if (value === 1) {
     enable = true;
   }
-  console.log(value);
-  console.log(enable);
 
   if (enable) {
     htmlInj1 = document.createElement("div");

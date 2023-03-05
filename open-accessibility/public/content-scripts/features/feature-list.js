@@ -1,6 +1,10 @@
+/*global chrome*/
+
 import addAltText from "./image-classifier.js";
+import desaturateColors from "./desaturate-colors.js";
 import disableAnimations from "./disable-animations.js";
 import dyslexiaRuler from "./dyslexia-ruler.js";
+import dyslexicFont from "./dyslexic-font.js";
 import emphasizeLinks from "./emphasize-links.js";
 import fontSize from "./font-size.js";
 import largeCursor from "./large-cursor.js";
@@ -9,35 +13,41 @@ import magnifier from "./magnifier.js";
 import wordSpacing from "./word-spacing.js";
 
 const FEATURE_LIST = {
-  WORD_SPACING: {
+  wordSpacing: {
     function: wordSpacing,
   },
-  LINE_HEIGHT: {
+  lineHeight: {
     function: lineHeight,
   },
-  FONT_SIZE: {
+  fontSize: {
     function: fontSize,
   },
-  DYSLEXIA_RULER: {
+  dyslexiaRuler: {
     function: dyslexiaRuler,
   },
-  READING_GUIDE: {
+  readingGuide: {
     function: magnifier,
   },
-  EMPHASIZE_LINKS: {
+  emphasizeLinks: {
     function: emphasizeLinks,
   },
-  COLOR_BLINDNESS: {
-    function: emphasizeLinks,
-  },
-  LARGE_CURSOR: {
+  largeCursor: {
     function: largeCursor,
   },
-  ADD_ALT_TEXT: {
+  imageCaptioning: {
     function: addAltText,
   },
-  DISABLE_ANIMATIONS: {
+  animation: {
     function: disableAnimations,
+  },
+  desaturate: {
+    function: desaturateColors,
+  },
+  dyslexiaFonts: {
+    function: dyslexicFont,
+  },
+  screenReader: {
+    function: () => {},
   },
 };
 
