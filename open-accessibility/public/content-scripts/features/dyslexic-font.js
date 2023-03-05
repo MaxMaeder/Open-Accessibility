@@ -1,6 +1,6 @@
 import { removeInj, updateCSS } from "../util/inject.js";
 
-import font from "../../images/font.js";
+import font from "../assets/font.js";
 
 let cssInj;
 

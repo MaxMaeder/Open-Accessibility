@@ -1,6 +1,6 @@
 import { removeInj, updateCSS } from "../util/inject.js";
 
-import pointer from "../../images/pointer.js";
+import pointer from "../assets/pointer.js";
 
 let enable = false;
 
