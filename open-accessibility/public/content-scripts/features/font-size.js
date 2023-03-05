@@ -6,7 +6,7 @@ let cssInj;
 
 const fontSize = (value) => {
   if (!Number.isInteger(value) || value < 0 || value > SPACINGS.length - 1) {
-    removeInj(cssInj);
+    cssInj = removeInj(cssInj);
     return;
   }
 

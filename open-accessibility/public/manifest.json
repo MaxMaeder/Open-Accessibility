@@ -17,13 +17,16 @@
     {
       "matches": ["http://*/*", "https://*/*"],
       "css": ["content-scripts/page-modifier.css"],
-      "js": ["content-scripts/content-script.js"]
+      "js": [
+        "content-scripts/lib/popper.min.js",
+        "content-scripts/content-script.js"
+      ]
     }
   ],
   "web_accessible_resources": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "resources": ["content-scripts/*.js"]
+      "resources": ["images/*", "content-scripts/*.js"]
     }
   ]
 }

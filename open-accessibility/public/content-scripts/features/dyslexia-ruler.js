@@ -16,19 +16,14 @@ const CSS = `
 `;
 
 window.addEventListener("mousemove", (e) => {
-  console.log("hi");
   if (!enable) return;
 
-  const mouseY = e.offsetY;
-  console.log(mouseY);
+  const mouseY = e.clientY;
   document.getElementById("ruler").style.top = mouseY + "px";
 });
 
 const dyslexiaRuler = (value) => {
-  let enable = false;
-  if (value === 1) {
-    enable = true;
-  }
+  enable = value;
 
   if (enable) {
     htmlInj = document.createElement("div");

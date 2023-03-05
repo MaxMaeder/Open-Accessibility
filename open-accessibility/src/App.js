@@ -1,7 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
 import SquareButton from "./components/square-button";
 import TestingForm from "./components/testing_form";
+import logo from "./logo.svg";
 import { sendMsg } from "./util/tabMessaging";
 import { useState } from "react";
 
@@ -17,6 +18,9 @@ function App() {
   const [dyslexiaRuler, setDyslexiaRuler] = useState(false);
   const [imageCaptioning, setImageCaptioning] = useState(false);
   const [emphasizeLinks, setEmphasizeLinks] = useState(false);
+  const [lineSpacing, setLineSpacing] = useState(false);
+  const [animation, setAnimation] = useState(false);
+  const [altText, setAltText] = useState(false);
 
   return (
     <div className="App">
@@ -27,7 +31,14 @@ function App() {
           <SquareButton
             text="Dylexia Fonts"
             icon={
-              <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-file-font mx-auto mt-4" viewBox="0 0 16 16">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="34"
+                height="34"
+                fill="currentColor"
+                class="bi bi-file-font mx-auto mt-4"
+                viewBox="0 0 16 16"
+              >
                 <path d="M10.943 4H5.057L5 6h.5c.18-1.096.356-1.192 1.694-1.235l.293-.01v6.09c0 .47-.1.582-.898.655v.5H9.41v-.5c-.803-.073-.903-.184-.903-.654V4.755l.298.01c1.338.043 1.514.14 1.694 1.235h.5l-.057-2z" />
                 <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
               </svg>
@@ -181,19 +192,42 @@ function App() {
             enabledState={largeCursor}
           />
 
-          <SquareButton text="Reading Guide" icon={<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-book-half mx-auto mt-4" viewBox="0 0 16 16">
-            <path d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
-          </svg>}
+          <SquareButton
+            text="Reading Guide"
+            icon={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="34"
+                height="34"
+                fill="currentColor"
+                class="bi bi-book-half mx-auto mt-4"
+                viewBox="0 0 16 16"
+              >
+                <path d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
+              </svg>
+            }
             onClick={() => {
               setReadingGuide(!readingGuide);
+              sendMsg({ action: "READING_GUIDE", value: readingGuide });
               sendMsg({ action: "READING_GUIDE", value: readingGuide });
             }}
             enabledState={readingGuide}
           />
 
-          <SquareButton text="Dyslexia Ruler" icon={<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-rulers mx-auto mt-4" viewBox="0 0 16 16">
-            <path d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-1H2v-1h4v-1H4v-1h2v-1H2v-1h4V9H4V8h2V7H2V6h4V2h1v4h1V4h1v2h1V2h1v4h1V4h1v2h1V2h1v4h1V1a1 1 0 0 0-1-1H1z" />
-          </svg>}
+          <SquareButton
+            text="Dyslexia Ruler"
+            icon={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="34"
+                height="34"
+                fill="currentColor"
+                class="bi bi-rulers mx-auto mt-4"
+                viewBox="0 0 16 16"
+              >
+                <path d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-1H2v-1h4v-1H4v-1h2v-1H2v-1h4V9H4V8h2V7H2V6h4V2h1v4h1V4h1v2h1V2h1v4h1V4h1v2h1V2h1v4h1V1a1 1 0 0 0-1-1H1z" />
+              </svg>
+            }
             onClick={() => {
               setDyslexiaRuler(!dyslexiaRuler);
               sendMsg({ action: "DYSLEXIA_RULER", value: dyslexiaRuler });
@@ -201,10 +235,21 @@ function App() {
             enabledState={dyslexiaRuler}
           />
 
-          <SquareButton text="Image Captioning" icon={<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-image mx-auto mt-4" viewBox="0 0 16 16">
-            <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-            <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
-          </svg>}
+          <SquareButton
+            text="Image Captioning"
+            icon={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="34"
+                height="34"
+                fill="currentColor"
+                class="bi bi-image mx-auto mt-4"
+                viewBox="0 0 16 16"
+              >
+                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
+              </svg>
+            }
             onClick={() => {
               setImageCaptioning(!imageCaptioning);
               sendMsg({ action: "IMAGE_CAPTIONING", value: imageCaptioning });
@@ -212,22 +257,32 @@ function App() {
             enabledState={imageCaptioning}
           />
 
-          <SquareButton text="Emphasize Links" icon={<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-link-45deg mx-auto mt-4" viewBox="0 0 16 16">
-            <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
-            <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z" />
-          </svg>}
+          <SquareButton
+            text="Emphasize Links"
+            icon={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="34"
+                height="34"
+                fill="currentColor"
+                class="bi bi-link-45deg mx-auto mt-4"
+                viewBox="0 0 16 16"
+              >
+                <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
+                <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z" />
+              </svg>
+            }
             onClick={() => {
               setEmphasizeLinks(!emphasizeLinks);
-              sendMsg({ action: "EMPHASIZE_LINKS", value: emphasizeLinks });
+              sendMsg({ active: "EMPHASIZE_LINKS", value: emphasizeLinks });
             }}
             enabledState={emphasizeLinks}
           />
 
           <TestingForm></TestingForm>
-
         </div>
-      </header >
-    </div >
+      </header>
+    </div>
   );
 }
 
